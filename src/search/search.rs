@@ -1,7 +1,7 @@
 // src/search/search.rs
 
 use crate::game::defs::{squarename, Color, Piece, Square};
-use crate::game::moves::{generate_legal_moves, Move, MoveList, ScoredMove, ScoredMoveList};
+use crate::game::moves::{generate_legal_moves, Move, MoveList, ScoredMove, ScoredMoveList, Flag};
 use crate::game::board::{Position, enemy_attacks, BitBoard};
 use crate::game::history::{History};
 use rand::Rng;

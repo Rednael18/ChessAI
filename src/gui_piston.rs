@@ -10,7 +10,7 @@ use rand::Rng;
 
 
 use crate::search::eval::{map_double_pawn_eval, map_double_pawn_eval_alt, map_king_safety, map_king_safety_optimized};
-use crate::search::search::{idwq_lmr, idwq_null_move, iterative_deepening_score};
+use crate::search::search::{idwq_lmr, idwq_lmr_see, idwq_null_move, iterative_deepening_score};
 #[allow(unused_imports)]
 use crate::{game::{
     board::{enemy_attacks, Position},
@@ -117,12 +117,12 @@ impl fmt::Display for BotConfig {
 
 fn default_bots() -> (BotConfig, BotConfig) {
     // Bot 1
-    let (eval_name_1, eval_fn_1) = ("map_king_safety_optimi", map_king_safety_optimized);
+    let (eval_name_1, eval_fn_1) = ("map_king_safety", map_king_safety);
     let (search_name_1, search_fn_1) = ("idwq_lmr", idwq_lmr);
 
     // Bot 2
     let (eval_name_2, eval_fn_2) = ("map_king_safety", map_king_safety);
-    let (search_name_2, search_fn_2) = ("idwq_lmr", idwq_lmr);
+    let (search_name_2, search_fn_2) = ("idwq_lmr_see", idwq_lmr_see);
 
     let bot1 = BotConfig {
         name: "Bot1",
@@ -252,7 +252,7 @@ fn draw_board<G: Graphics>(c: Context, g: &mut G) {
         for file in 0..8 {
             let x = MARGIN + file as f64 * SQUARE;
             let y = MARGIN + (7 - rank) as f64 * SQUARE;
-            let color = if (rank + file) % 2 == 0 { LIGHT } else { DARK };
+            let color = if (rank + file) % 2 == 0 { DARK } else { LIGHT };
             rectangle(color, [x, y, SQUARE, SQUARE], c.transform, g);
         }
     }
